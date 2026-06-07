@@ -5,8 +5,9 @@ on:
         - "main"
 
 jobs:
-  runs-on: ubuntu-latest
+  
   redeploy_everything:
+    runs-on: ubuntu-latest
     name: Deploying the frontend
     steps:
       - name: SSH into server
