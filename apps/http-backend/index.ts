@@ -1,8 +1,11 @@
 import express from 'express';
-
-
+import prisma from '@repo/db/prisma'
 const app = express();
 
+
+app.get("/",(req,res)=>{
+    
+})
 
 
 

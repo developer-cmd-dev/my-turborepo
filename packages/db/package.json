@@ -9,7 +9,7 @@
     "db:deploy": "prisma migrate deploy"
   }, 
   "exports":{
-    "prismaClient.ts":"./index.ts"
+    "./prisma":"./index.ts"
   },
   "devDependencies": {
     "@types/bun": "latest",
