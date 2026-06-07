@@ -17,12 +17,23 @@ jobs:
           chmod 600 ~/ssh_key
 
           ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@98.80.79.237 << 'EOF'
-            cd my-turborepo
-            git pull
-            bun install
-            bun run build
-            pm2 restart web
-            pm2 restart http-server
-            pm2 restart websocket
-            
+
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+
+          export PATH="$HOME/.bun/bin:$PATH"
+
+          node -v
+          pm2 -v
+          bun -v
+
+          cd /home/ubuntu/my-turborepo
+
+          bun install
+          bun run build
+
+          pm2 restart web
+          pm2 restart http-server
+          pm2 restart websocket
+
           EOF
