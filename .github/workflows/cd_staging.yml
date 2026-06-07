@@ -19,8 +19,8 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@98.80.79.237 << 'EOF'
             cd my-turborepo
             git pull
-            pnpm install
-            pnpm run build
+            bun install
+            bun run build
             pm2 restart web
             pm2 restart http-server
             pm2 restart websocket
