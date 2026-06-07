@@ -1,0 +1,14 @@
+name: Deploy to staging
+on:
+    push:
+      brnaches:
+        - "main"
+
+jobs:
+  redeploy_everything:
+    name: Deploying the frontend
+    steps:
+      - name: SSH into server
+      - run:  |
+          echo ${{secrets.SSH_PRIVATEKEY}} &> ~/ssh_key
+          ssh -i ~/ssh_key ubuntu@98.80.79.237
