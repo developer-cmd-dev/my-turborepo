@@ -1,20 +1,27 @@
 name: Deploy to staging
+
 on:
-    push:
-      branches: ["main"]
-       
+  push:
+    branches:
+      - main
+
 jobs:
-  
   redeploy_everything:
     runs-on: ubuntu-latest
     name: Deploying the frontend
+
     steps:
-      - run:  |
-          echo ${{secrets.SSH_PRIVATE_KEY}} &> ~/ssh_key
-          ssh -i ~/ssh_key ubuntu@98.80.79.237
-          cd my-turborepo && git pull
-          bun install
-          bun run build
-          pm2 restart web
-          pm2 restart http-server
-          pm2 restart websocket
+      - name: SSH into server
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/ssh_key
+          chmod 600 ~/ssh_key
+
+          ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@98.80.79.237 << 'EOF'
+            cd my-turborepo
+            git pull
+            pnpm install
+            pnpm run build
+            pm2 restart web
+            pm2 restart http-server
+            pm2 restart websocket
+          EOF
