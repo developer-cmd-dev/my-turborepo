@@ -24,4 +24,5 @@ jobs:
             pm2 restart web
             pm2 restart http-server
             pm2 restart websocket
+            
           EOF
